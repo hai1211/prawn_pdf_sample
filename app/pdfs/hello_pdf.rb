@@ -11,16 +11,14 @@ class HelloPdf
 
     greeting
 
-    company_icon
-
-    icom_image_cursor = cursor
+    info_cursor = cursor
     move_down 30
     order_info
 
-    move_cursor_to icom_image_cursor - 30
+    move_cursor_to info_cursor
     company_info
 
-    move_cursor_to cursor + 100
+    move_cursor_to cursor + 80
     table
 
     table_cursor = cursor
@@ -70,10 +68,6 @@ class HelloPdf
     text "株式会社○○○○○○○○○○○○ 御中", size: 8
   end
 
-  def company_icon
-    image "#{Rails.root}/app/assets/images/Picture1.png", at: [400, cursor]
-  end
-
   def order_info
     [
       {key: '納期', value: '別途ご相談', size: 0},
@@ -113,6 +107,8 @@ class HelloPdf
 
   def company_info
     bounding_box([400, cursor], width: 200, height: 200) do
+      image "#{Rails.root}/app/assets/images/Picture1.png", at: [bounds.left, bounds.top]
+      move_down 30
       text "株式会社アイコム", size: 8
       text "東京営業所", size: 8
       move_down 10
